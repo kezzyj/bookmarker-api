@@ -44,44 +44,38 @@ def handle_bookmarks():
             'created_at': bookmark.created_at,
             'updated_at': bookmark.updated_at,
         }), HTTP_201_CREATED
+    else:
+        page = request.args.get('page', 1, type=int)
+        per_page = request.args.get('per_page', 5, type=int)
 
-@bookmarks.get('/')
-@jwt_required()
-@swag_from("./docs/bookmarks/getAllBookmark.yaml")
-def handle_bookmarks_get():
-    current_user = get_jwt_identity()
+        bookmarks = Bookmark.query.filter_by(
+            user_id=current_user).paginate(page=page, per_page=per_page)
 
-    page = request.args.get('page', 1, type=int)
-    per_page = request.args.get('per_page', 5, type=int)
+        data = []
 
-    bookmarks = Bookmark.query.filter_by(
-        user_id=current_user).paginate(page=page, per_page=per_page)
+        for bookmark in bookmarks:
+            data.append({
+                'id': bookmark.id,
+                'url': bookmark.url,
+                'short_url': bookmark.short_url,
+                'visit': bookmark.visits,
+                'body': bookmark.body,
+                'created_at': bookmark.created_at,
+                'updated_at': bookmark.updated_at,
+            })
 
-    data = []
+        meta = {
+            "page": bookmarks.page,
+            'pages': bookmarks.pages,
+            'total_count': bookmarks.total,
+            'prev_page': bookmarks.prev_num,
+            'next_page': bookmarks.next_num,
+            'has_next': bookmarks.has_next,
+            'has_prev': bookmarks.has_prev,
 
-    for bookmark in bookmarks:
-        data.append({
-            'id': bookmark.id,
-            'url': bookmark.url,
-            'short_url': bookmark.short_url,
-            'visit': bookmark.visits,
-            'body': bookmark.body,
-            'created_at': bookmark.created_at,
-            'updated_at': bookmark.updated_at,
-        })
+        }
 
-    meta = {
-        "page": bookmarks.page,
-        'pages': bookmarks.pages,
-        'total_count': bookmarks.total,
-        'prev_page': bookmarks.prev_num,
-        'next_page': bookmarks.next_num,
-        'has_next': bookmarks.has_next,
-        'has_prev': bookmarks.has_prev,
-
-    }
-
-    return jsonify({'data': data, 'meta': meta}), HTTP_200_OK
+        return jsonify({'data': data, 'meta': meta}), HTTP_200_OK
 
 
 @bookmarks.get("/<int:id>")
