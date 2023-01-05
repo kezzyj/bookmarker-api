@@ -108,7 +108,6 @@ def get_bookmark(id):
 
 @bookmarks.delete("/<int:id>")
 @jwt_required()
-@swag_from("./docs/bookmarks/deleteookmark.yaml")
 def delete_bookmark(id):
     current_user = get_jwt_identity()
 
