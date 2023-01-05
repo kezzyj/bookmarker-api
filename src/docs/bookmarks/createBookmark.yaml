@@ -1,32 +1,27 @@
-User Registration
+Bookmark Creation
 ---
 tags:
-  - Authentication
+  - Bookmarks
 parameters:
-  - name: body
+  - name: url
     description: The body should contain the user Registration data
     in: body
     required: true
     schema:
       type: object
       required:
-        - "email"
-        - "password"
-        - "username"
+        - "url"
+        - "body"
       properties:
-        email:
-          type: "email"
-          example: "crycetruly@gmail.com"
-        username:
-          type: "username"
-          example: "usernamex"
-        password:
-          type: "string"
-          format: password
-          example: "********"
+        url:
+          type: "url"
+          example: "http://www.google.com"
+        body:
+          type: "body"
+          example: "name of the url"
 responses:
   201:
-    description: When a user successfully logs in
+    description: When a bookmark is successfully created
 
   400:
-    description: Fails to Register due to bad request data
+    description: Fails to Create a bookmark
