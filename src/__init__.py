@@ -32,8 +32,8 @@ def create_app(test_config=None):
 
     db.app = app
     db.init_app(app)
-#     with app.app_context():
-    db.create_all()
+    with app.app_context():
+        db.create_all()
 
     JWTManager(app)
     app.register_blueprint(auth)
