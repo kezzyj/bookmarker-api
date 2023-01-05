@@ -1,0 +1,14 @@
+Bookmark View with id
+---
+tags:
+  - Bookmarks
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+responses:
+  201:
+    description: When a bookmark is successfully created
+
+  400:
+    description: Fails to Create a bookmark
