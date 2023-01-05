@@ -1,0 +1,27 @@
+Bookmark Edition
+---
+tags:
+  - Bookmarks
+parameters:
+  - name: url
+    description: The body should contain the user Registration data
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "url"
+        - "body"
+      properties:
+        url:
+          type: "url"
+          example: "http://www.google.com"
+        body:
+          type: "body"
+          example: "name of the url"
+responses:
+  201:
+    description: When a bookmark is successfully Edited
+
+  400:
+    description: Fails to Edit a bookmark

@@ -12,6 +12,7 @@ bookmarks = Blueprint("bookmarks", __name__, url_prefix="/api/v1/bookmarks")
 # @bookmarks.route('/', methods=['POST', 'GET'])
 @bookmarks.post('/')
 @jwt_required()
+@swag_from("./docs/bookmarks/createBookmark.yaml")
 def handle_bookmarks():
     current_user = get_jwt_identity()
 
@@ -46,6 +47,7 @@ def handle_bookmarks():
 
 @bookmarks.get('/')
 @jwt_required()
+@swag_from("./docs/bookmarks/getAllBookmark.yaml")
 def handle_bookmarks_get():
     current_user = get_jwt_identity()
 
