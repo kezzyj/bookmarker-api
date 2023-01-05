@@ -11,6 +11,7 @@ bookmarks = Blueprint("bookmarks", __name__, url_prefix="/api/v1/bookmarks")
 
 @bookmarks.route('/', methods=['POST', 'GET'])
 @jwt_required()
+@swag_from("./docs/bookmarks/createBookmark.yaml")
 def handle_bookmarks():
     current_user = get_jwt_identity()
 
@@ -79,6 +80,7 @@ def handle_bookmarks():
 
 @bookmarks.get("/<int:id>")
 @jwt_required()
+@swag_from("./docs/bookmarks/getBookmark.yaml")
 def get_bookmark(id):
     current_user = get_jwt_identity()
 
@@ -100,6 +102,7 @@ def get_bookmark(id):
 
 @bookmarks.delete("/<int:id>")
 @jwt_required()
+@swag_from("./docs/bookmarks/deleteBookmark.yaml")
 def delete_bookmark(id):
     current_user = get_jwt_identity()
 
@@ -117,6 +120,7 @@ def delete_bookmark(id):
 @bookmarks.put('/<int:id>')
 @bookmarks.patch('/<int:id>')
 @jwt_required()
+@swag_from("./docs/bookmarks/editBookmark.yaml")
 def editbookmark(id):
     current_user = get_jwt_identity()
 
