@@ -5,7 +5,7 @@ tags:
 parameters:
   - name: url
     description: The body should contain the user Registration data
-    in: body
+#     in: body
     required: true
     schema:
       type: object
