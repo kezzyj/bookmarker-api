@@ -9,8 +9,8 @@ from flasgger import swag_from
 bookmarks = Blueprint("bookmarks", __name__, url_prefix="/api/v1/bookmarks")
 
 
-# @bookmarks.route('/', methods=['POST', 'GET'])
-@bookmarks.post('/')
+@bookmarks.route('/', methods=['POST', 'GET'])
+# @bookmarks.post('/')
 @jwt_required()
 @swag_from("./docs/bookmarks/createBookmark.yaml")
 def handle_bookmarks():
