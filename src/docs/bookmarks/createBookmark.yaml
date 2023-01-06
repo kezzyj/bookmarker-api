@@ -4,8 +4,8 @@ post:
   tags:
     - Bookmarks
   parameters:
-    - name: url
-      description: The body should contain the user Registration data
+    - name: body
+      description: The body should contain the Url data
       in: body
       required: true
       schema:

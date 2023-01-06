@@ -44,6 +44,7 @@ def handle_bookmarks():
             'created_at': bookmark.created_at,
             'updated_at': bookmark.updated_at,
         }), HTTP_201_CREATED
+
     else:
         page = request.args.get('page', 1, type=int)
         per_page = request.args.get('per_page', 5, type=int)
